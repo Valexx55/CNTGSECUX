@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- declaramos un permiso personalizado con protección normal -->
-    <permission android:name="edu.vmg.cntgsecux.PERMISO_APP"
+    <permission
+        android:name="edu.vmg.cntgsecux.PERMISO_APP"
         android:label="permiso_personalizado"
         android:protectionLevel="normal" />
 
@@ -17,20 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CNTGSECUX"
         tools:targetApi="31">
-
-        <!-- esta actividad se puede lanzar desde fuera de la app--> <!-- protegemos a la actividad con este permiso -->
+        <activity
+            android:name=".contacto.SeleccionContactoPermisos"
+            android:exported="false" />
+        <activity
+            android:name=".contacto.SeleccionContacto"
+            android:exported="false" /> <!-- esta actividad se puede lanzar desde fuera de la app -->
+        <!-- protegemos a la actividad con este permiso -->
         <activity
             android:name=".permisosbasicos.ActividadUno"
             android:exported="true"
             android:permission="edu.vmg.cntgsecux.PERMISO_APP">
-                <intent-filter>
-                    <action android:name="edu.vmg.cntgsecux.Saludo"/>
-                    <category android:name="android.intent.category.DEFAULT"/>
-                    <!-- con este atributo, permito usar esta pantalla/actividad desde fuera de la app -->
-                </intent-filter>
+            <intent-filter>
+                <action android:name="edu.vmg.cntgsecux.Saludo" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- con este atributo, permito usar esta pantalla/actividad desde fuera de la app -->
+            </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
