@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- declaro los permisos que uso, aparecen en la ficha de la tienda
+    y al usuario en el momento de la instalación -->
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+
     <!-- declaramos un permiso personalizado con protección normal -->
     <permission
         android:name="edu.vmg.cntgsecux.PERMISO_APP"

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.vmg.cntgsecux.contacto.SeleccionContacto
+import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
 import edu.vmg.cntgsecux.permisosbasicos.ActividadUno
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         //val intent = Intent (this, ActividadUno::class.java)
         //"navego a la actividad 1"
         //startActivity(intent) //lanzo la actividad destino
-        startActivity(Intent(this, SeleccionContacto::class.java))
+        //startActivity(Intent(this, SeleccionContacto::class.java))
+        startActivity(Intent(this, SeleccionContactoPermisos::class.java))
     }
 }
