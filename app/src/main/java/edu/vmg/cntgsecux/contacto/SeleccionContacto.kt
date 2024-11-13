@@ -1,6 +1,5 @@
 package edu.vmg.cntgsecux.contacto
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -15,21 +14,18 @@ import edu.vmg.cntgsecux.R
 
 class SeleccionContacto : AppCompatActivity() {
 
-
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-    { result: ActivityResult ->
-        Log.d("MIAPP", "A la vuelta de la app de contactos ...")
-        if (result.resultCode == RESULT_OK) {
-            mostrarDatosConsultaContacto(result.data);
-        } else {
-            Log.d("MIAPP", "La selección de contacto fue mal")
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result: ActivityResult ->
+            Log.d("MIAPP", "A la vuelta de la app de contactos ...")
+            if (result.resultCode == RESULT_OK) {
+                mostrarDatosConsultaContacto(result.data)
+            } else {
+                Log.d("MIAPP", "La selección de contacto fue mal")
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_seleccion_contacto)
@@ -40,7 +36,6 @@ class SeleccionContacto : AppCompatActivity() {
         }
         selectContact()
     }
-
 
     fun selectContact() {
         //"LANZAME LA APP DE CONTACTOS+
@@ -53,8 +48,7 @@ class SeleccionContacto : AppCompatActivity() {
         }*/
 
         //forma nueva
-        if (intent.resolveActivity(packageManager) != null)//hay alguna app de contactos??
-        {
+        if (intent.resolveActivity(packageManager) != null) { //hay alguna app de contactos??
             startForResult.launch(intent)
         } else {
             Log.d("MIAPP", "No hay una app compatible con este Intent")
@@ -71,24 +65,25 @@ class SeleccionContacto : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d("MIAPP", "A la vuelta de la app de contactos ...")
         if (requestCode == 454 && resultCode == RESULT_OK) {
-            mostrarDatosConsultaContacto(data);
+            mostrarDatosConsultaContacto(data)
         } else {
             Log.d("MIAPP", "La selección de contacto fue mal")
         }
     }
 
-    fun mostrarDatosConsultaContacto (intentResultado : Intent?)
-    {
+    fun mostrarDatosConsultaContacto(intentResultado: Intent?) {
         val contactUri = intentResultado?.data
         Log.d("MIAPP", "La cosa ha ido bien $contactUri")
-        val cursor = contentResolver.query(contactUri!!, null, null, null, null);
-        cursor!!.moveToFirst();
-        val columnanumero = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-        val columnanombre = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-        val nombre = cursor.getString(columnanombre)
-        val numero = cursor.getString(columnanumero)
-        Log.d("MIAPP", "Teléfono Seleccionado $nombre $numero ")
-        cursor.close();
+        val cursor = contentResolver.query(contactUri!!, null, null, null, null)
+
+        cursor?.use {
+            cursor.moveToFirst()
+            val columnanumero = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            val columnanombre = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
+            val nombre = cursor.getString(columnanombre)
+            val numero = cursor.getString(columnanumero)
+            Log.d("MIAPP", "Teléfono Seleccionado $nombre $numero")
+        }
 
     }
 }

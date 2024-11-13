@@ -1,7 +1,6 @@
 package edu.vmg.cntgsecux.contacto
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
@@ -34,20 +33,17 @@ class SeleccionContactoPermisos : AppCompatActivity() {
 
         //comprobamos que el permiso está concecido
         //si está concecido, le los contactos, usando una URI del Content Provider
-        //si no , lo pedimos
+        //si no, lo pedimos
 
-
-        val permisoConcedido = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
-        if (permisoConcedido == PackageManager.PERMISSION_GRANTED)
-        {
+        val permisoConcedido =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+        if (permisoConcedido == PackageManager.PERMISSION_GRANTED) {
             Log.d("MIAPP", "Permiso de leer contactos concedido")
-            leerContactos ()
+            leerContactos()
         } else {
             Log.d("MIAPP", "Permiso de leer contactos NO concedido, pedimos permisos")
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), 300)
         }
-
-
 
     }
 
@@ -58,11 +54,9 @@ class SeleccionContactoPermisos : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d("MIAPP", "A la vuelta de pedir el permiso")
-        when (requestCode)
-        {
+        when (requestCode) {
             300 -> {
-                if (grantResults[0]==PackageManager.PERMISSION_GRANTED)
-                {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("MIAPP", "Permiso concedido")
                     leerContactos()
                 } else {
@@ -73,98 +67,119 @@ class SeleccionContactoPermisos : AppCompatActivity() {
         }
     }
 
-    private fun consultarTodosLosTelefonos () :Unit
-    {
+    private fun consultarTodosLosTelefonos() {
         Log.d("MIAPP", "consultarTodosLosTelefonos")
-        val telefonos : Cursor? =  contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null)
-        var numcolumna = 0
-        var number : String ? = ""
+        val telefonos: Cursor? = contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
 
-        while (telefonos?.moveToNext()==true)
-        {
-            numcolumna = telefonos.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-            number = telefonos.getString(numcolumna)
-            Log.d("MIAPP", "Telefono $number")
+        telefonos?.use {
+            var numColumna = 0
+            var number: String? = ""
+
+            while (telefonos.moveToNext()) {
+                numColumna = telefonos.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                number = telefonos.getString(numColumna)
+                Log.d("MIAPP", "Telefono $number")
+            }
         }
-        telefonos?.close()//Cierro el cursor!
 
     }
+
     private fun leerContactos() {
         //consultarTodosLosTelefonos()
         //CONSULTA DEL CP DE CONTACTOS MÁS A FONDO
-        val uri_contactos = ContactsContract.Contacts.CONTENT_URI//content://com.android.contacts/contacts
+        val uriContactos =
+            ContactsContract.Contacts.CONTENT_URI //content://com.android.contacts/contacts
 
-        val cursor_contactos = contentResolver.query(
-            uri_contactos,
+        val cursorContactos = contentResolver.query(
+            uriContactos,
             null,
             ContactsContract.Contacts.DISPLAY_NAME + " = 'Olga'",
             null,
             null,
         )
 
-        if (cursor_contactos?.moveToFirst() == true)
-        {
-            Log.d("MIAPP", "NUM CONTACTOS = " + cursor_contactos.count)
+        cursorContactos?.use {
 
-            val numColId = cursor_contactos.getColumnIndex(ContactsContract.Contacts._ID)
-            val numColNombre = cursor_contactos.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
+            if (cursorContactos.moveToFirst()) {
+                Log.d("MIAPP", "NUM CONTACTOS = " + cursorContactos.count)
+
+                val numColId = cursorContactos.getColumnIndex(ContactsContract.Contacts._ID)
+                val numColNombre =
+                    cursorContactos.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
 
 
-            val id = cursor_contactos.getLong(numColId)
-            val nombre = cursor_contactos.getString(numColNombre)
+                val id = cursorContactos.getLong(numColId)
+                val nombre = cursorContactos.getString(numColNombre)
 
-            Log.d("MIAPP", "Nombre = $nombre ID = $id")
+                Log.d("MIAPP", "Nombre = $nombre ID = $id")
 
-            var cursor_raw = contentResolver.query(
-                ContactsContract.RawContacts.CONTENT_URI,
-                null,
-                ContactsContract.RawContacts.CONTACT_ID + " = " +id,
-                null,
-                null
-            )
-            if (cursor_raw?.moveToFirst()==true){
-                do {
-                    val columnaIdRaw = cursor_raw.getColumnIndex(ContactsContract.RawContacts._ID)
-                    val id_raw = cursor_raw.getLong(columnaIdRaw)
+                var cursorRaw = contentResolver.query(
+                    ContactsContract.RawContacts.CONTENT_URI,
+                    null,
+                    ContactsContract.RawContacts.CONTACT_ID + " = " + id,
+                    null,
+                    null
+                )
 
-                    val tipoIdRaw = cursor_raw.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE)
-                    val tipo_raw = cursor_raw.getLong(tipoIdRaw)
+                cursorRaw?.use {
 
-                    val nombreCuentaIdRaw = cursor_raw.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_NAME)
-                    val nombreCuenta_raw = cursor_raw.getLong(nombreCuentaIdRaw)
-
-                    Log.d("MIAPP", "(RAW) NOMBRE CUENTA = $nombreCuenta_raw TIPO CUENTA = $tipo_raw ID = $id_raw")
-
-                    val cursor_data = contentResolver.query(
-                        ContactsContract.Data.CONTENT_URI,
-                        null,
-                        ContactsContract.Data.RAW_CONTACT_ID +" = " + id_raw,
-                        null,
-                        null
-                    )
-
-                    if (cursor_data?.moveToFirst()==true)
-                    {
+                    if (cursorRaw.moveToFirst()) {
                         do {
-                            val tipoMimeCol = cursor_data.getColumnIndex(ContactsContract.Data.MIMETYPE)
-                            val tipoMime = cursor_data.getString(tipoMimeCol)
-                            val dataCol = cursor_data.getColumnIndex(ContactsContract.Data.DATA1)
-                            val data = cursor_data.getString(dataCol)
+                            val columnaIdRaw =
+                                cursorRaw.getColumnIndex(ContactsContract.RawContacts._ID)
+                            val idRaw = cursorRaw.getLong(columnaIdRaw)
 
-                            Log.d("MIAPP", "   (DATA) MIME = $tipoMime DATA = $data")
+                            val tipoIdRaw =
+                                cursorRaw.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE)
+                            val tipoRaw = cursorRaw.getString(tipoIdRaw)
 
-                        } while (cursor_data.moveToNext())
+                            val nombreCuentaIdRaw =
+                                cursorRaw.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_NAME)
+                            val nombreCuentaRaw = cursorRaw.getString(nombreCuentaIdRaw)
+
+                            Log.d(
+                                "MIAPP",
+                                "(RAW) NOMBRE CUENTA = $nombreCuentaRaw TIPO CUENTA = $tipoRaw ID = $idRaw"
+                            )
+
+                            val cursorData = contentResolver.query(
+                                ContactsContract.Data.CONTENT_URI,
+                                null,
+                                ContactsContract.Data.RAW_CONTACT_ID + " = " + idRaw,
+                                null,
+                                null
+                            )
+
+                            cursorData?.use {
+                                if (cursorData.moveToFirst()) {
+                                    do {
+                                        val tipoMimeCol =
+                                            cursorData.getColumnIndex(ContactsContract.Data.MIMETYPE)
+                                        val tipoMime = cursorData.getString(tipoMimeCol)
+                                        val dataCol =
+                                            cursorData.getColumnIndex(ContactsContract.Data.DATA1)
+                                        val data = cursorData.getString(dataCol)
+
+                                        Log.d("MIAPP", "   (DATA) MIME = $tipoMime DATA = $data")
+
+                                    } while (cursorData.moveToNext())
+                                }
+                            }
+
+                        } while (cursorRaw.moveToNext())
                     }
-                    cursor_data?.close()
+                }
 
-
-                } while (cursor_raw.moveToNext())
             }
-            cursor_raw?.close()
 
         }
-        cursor_contactos?.close()
-    }
 
+    }
 
 }
