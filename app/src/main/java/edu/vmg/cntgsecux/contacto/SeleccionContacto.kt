@@ -27,13 +27,15 @@ class SeleccionContacto : AppCompatActivity() {
     fun selectContact() {
         //"LANZAME LA APP DE CONTACTOS+
         Log.d("MIAPP", "Lanzando la app de contactos ...")
-        val intent = Intent(Intent.ACTION_PICK).apply {
-            type = ContactsContract.Contacts.CONTENT_TYPE
-        }
+        val intent = Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
         if (intent.resolveActivity(packageManager) != null) {
             startActivityForResult(intent, 454)
         }
     }
+
+    //2 hacer la nueva forma de volver de a la aplicación / quitar el método deprecado
+    //3 hacer la seleccion de contactos consultado el content provider directamente
+    //(para lo cual hacen falta permisos)
 
     //este método se invoca a la vuelta de la app de contACTOS UNA VEZ Q HE SELECCIONADO UNO
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -42,11 +44,18 @@ class SeleccionContacto : AppCompatActivity() {
         if (requestCode == 454 && resultCode == RESULT_OK) {
             val contactUri = data?.data
             Log.d("MIAPP", "La cosa ha ido bien $contactUri")
-            //TODO 1 recuperar info del contacto del seleccionado y mostrarlo
-            //2 hacer la nueva forma de volver de a la aplicación / quitar el método deprecado
-            //3 hacer la seleccion de contactos consultado el content provider directamente
-            //(para lo cual hacen falta permisos)
+            val cursor = contentResolver.query(contactUri!!, null, null, null, null);
+            cursor!!.moveToFirst();
+            val columnanumero = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            val columnanombre = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+            val nombre = cursor.getString(columnanombre)
+            val numero = cursor.getString(columnanumero)
+            Log.d("MIAPP", "Teléfono Seleccionado $nombre $numero ")
+            cursor.close();
 
+
+        } else {
+            Log.d("MIAPP", "La selección de contacto fue mal")
         }
     }
 }
