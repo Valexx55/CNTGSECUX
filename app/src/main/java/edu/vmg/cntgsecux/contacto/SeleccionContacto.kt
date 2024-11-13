@@ -56,6 +56,8 @@ class SeleccionContacto : AppCompatActivity() {
         if (intent.resolveActivity(packageManager) != null)//hay alguna app de contactos??
         {
             startForResult.launch(intent)
+        } else {
+            Log.d("MIAPP", "No hay una app compatible con este Intent")
         }
 
     }
