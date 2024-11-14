@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="70">
+        <TextView
+            android:id="@+id/tituloCancion"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="65"
+            android:text="NO PUEDO SIN TI"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/nombreArtista"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="35"
+            android:text="Rapahel"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="15">
+        <ImageView
+            android:id="@+id/descargarCancion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_arrow_circle_down_24"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="15">
+        <ImageView
+            android:id="@+id/reproducirCancion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_play_circle_outline_24"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
