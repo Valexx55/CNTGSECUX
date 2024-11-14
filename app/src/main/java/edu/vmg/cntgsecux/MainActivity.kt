@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.vmg.cntgsecux.contacto.SeleccionContacto
 import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
+import edu.vmg.cntgsecux.descargacanciones.DescargaCancionesActivity
 import edu.vmg.cntgsecux.permisosbasicos.ActividadUno
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         //"navego a la actividad 1"
         //startActivity(intent) //lanzo la actividad destino
         //startActivity(Intent(this, SeleccionContacto::class.java))
-        startActivity(Intent(this, SeleccionContactoPermisos::class.java))
+        //startActivity(Intent(this, SeleccionContactoPermisos::class.java))
+        startActivity(Intent(this, DescargaCancionesActivity::class.java))
     }
 }
