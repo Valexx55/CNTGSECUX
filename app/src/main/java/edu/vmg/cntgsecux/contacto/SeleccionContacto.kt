@@ -60,6 +60,9 @@ class SeleccionContacto : AppCompatActivity() {
             Log.d("MIAPP", "No hay una app compatible con este Intent")
         }
 
+
+
+
     }
 
     //2 hacer la nueva forma de volver de a la aplicación / quitar el método deprecado
