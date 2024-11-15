@@ -3,6 +3,7 @@ package edu.vmg.cntgsecux.descargacanciones
 import android.app.DownloadManager
 import android.app.DownloadManager.Request
 import android.content.Context
+import android.content.IntentFilter
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -140,7 +142,7 @@ class DescargaCancionesActivity : AppCompatActivity(), OnQueryTextListener {
     fun reproducirCancion(view: View) {
 
         val urlcancion =  view.tag as String//obtengo la canción asociada a ese botón
-        Log.e("MIAPP", "Toca reproducir canción $urlcancion")
+        Log.d("MIAPP", "Toca reproducir canción $urlcancion")
         val uri = Uri.parse(urlcancion)
         val mediaPlayer = MediaPlayer.create(this, uri)
         mediaPlayer.start()//reproduzco la canción
@@ -148,11 +150,34 @@ class DescargaCancionesActivity : AppCompatActivity(), OnQueryTextListener {
     fun descargarCancion(view: View) {
         val urlcancion =  view.tag as String//obtengo la canción asociada a ese botón
         //1 preparar la descarga
+        Log.d("MIAPP", "preparo descarga")
         var peticion = prepararDescarga(urlcancion)
+        //1.5 preparar el receiver
+        Log.d("MIAPP", "preparo receptor")
+        var descargaReceiver = DescargaReceiver()
+        var intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)//evento del que está pendiente el receptor
+
+        ContextCompat.registerReceiver(this, descargaReceiver, intentFilter,
+            ContextCompat.RECEIVER_EXPORTED
+        )
+
         //2 solitar la descarga
+        Log.d("MIAPP", "solicito descarga")
         var downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         var idDescarga:Long =  downloadManager.enqueue(peticion)//descargate esto (peticion)
 
+        descargaReceiver.idDescarga = idDescarga//dentro del receptor guaardo el id de descarga para saber que es el mío
+        descargaReceiver.context = this//paso la pantalla, para luego vovler a ella e informar del resultado de la descarga
+    }
+
+    fun actualizarEstadoDescarga (estadoDescarga:Int)
+    {
+        if (estadoDescarga == DownloadManager.STATUS_FAILED)
+        {
+            Log.d("MIAPP", "La descarga fue mal")
+        } else {
+            Log.d("MIAPP", "La descarga fue bien")
+        }
     }
 
     fun prepararDescarga (url: String): Request
