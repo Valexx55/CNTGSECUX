@@ -15,7 +15,7 @@ class CancionViewHolder (fila:View) : ViewHolder(fila) {
 
     fun cargarCancionEnHolder (cancion: Cancion)
     {
-        tituloCancion.text = cancion.trackName
+        tituloCancion.text = cancion.trackName //TODO ajsutar el tamanño máximo
         nombreArtista.text = cancion.artistName
         iconoDescargar.tag = cancion.previewUrl
         iconoReproducir.tag = cancion.previewUrl
