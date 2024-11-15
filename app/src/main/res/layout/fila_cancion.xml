@@ -32,7 +32,7 @@
         android:layout_height="match_parent"
         android:layout_weight="15">
         <ImageView
-            android:id="@+id/descargarCancion"
+            android:id="@+id/icdescargarCancion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_arrow_circle_down_24"
@@ -44,7 +44,7 @@
         android:layout_height="match_parent"
         android:layout_weight="15">
         <ImageView
-            android:id="@+id/reproducirCancion"
+            android:id="@+id/icreproducirCancion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_play_circle_outline_24"

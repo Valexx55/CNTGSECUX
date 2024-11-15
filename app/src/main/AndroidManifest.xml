@@ -6,6 +6,10 @@
     y al usuario en el momento de la instalación
     -->
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- declaramos un permiso personalizado con protección normal -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!--necesario para comprobar si hay conexión, y qué tipo -->
+    <uses-permission android:name="android.permission.INTERNET"/> <!--necesario para comprobar si hay conexión, y qué tipo -->
+
+
     <permission
         android:name="edu.vmg.cntgsecux.PERMISO_APP"
         android:label="permiso_personalizado"
