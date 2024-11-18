@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!--
     declaro los permisos que uso, aparecen en la ficha de la tienda
     y al usuario en el momento de la instalación
@@ -20,18 +19,24 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:logo="@drawable/baseline_arrow_circle_down_24"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CNTGSECUX"
         tools:targetApi="31">
+        <activity
+            android:name=".preferences.FormularioPreferenciasActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".descargacanciones.DescargaReceiver"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".descargacanciones.DescargaCancionesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Descarga Canciones" />
         <activity
             android:name=".contacto.SeleccionContactoPermisos"
             android:exported="false" />

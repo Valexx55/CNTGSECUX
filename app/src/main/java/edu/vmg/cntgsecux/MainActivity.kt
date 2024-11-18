@@ -10,6 +10,7 @@ import edu.vmg.cntgsecux.contacto.SeleccionContacto
 import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
 import edu.vmg.cntgsecux.descargacanciones.DescargaCancionesActivity
 import edu.vmg.cntgsecux.permisosbasicos.ActividadUno
+import edu.vmg.cntgsecux.preferences.FormularioPreferenciasActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         //startActivity(intent) //lanzo la actividad destino
         //startActivity(Intent(this, SeleccionContacto::class.java))
         //startActivity(Intent(this, SeleccionContactoPermisos::class.java))
-        startActivity(Intent(this, DescargaCancionesActivity::class.java))
+        //startActivity(Intent(this, DescargaCancionesActivity::class.java))
+        startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
     }
 }
