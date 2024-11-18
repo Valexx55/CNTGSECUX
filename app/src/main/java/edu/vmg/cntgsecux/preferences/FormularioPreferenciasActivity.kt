@@ -33,7 +33,9 @@ class FormularioPreferenciasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingVistas = ActivityFormularioPreferenciasBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_formulario_preferencias)
+        val view = bindingVistas.root
+        setContentView(view)
+        //setContentView(R.layout.activity_formulario_preferencias)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -47,7 +49,7 @@ class FormularioPreferenciasActivity : AppCompatActivity() {
 
     fun botonGuardarFormulario(view: View) {
         Log.d("MIAPP", "Boton guardar formulario tocado")
-        val nombre = bindingVistas.textnombre.text.toString()
+        val nombre :String = bindingVistas.textnombre.text.toString()
         val edad = bindingVistas.textedad.text.toString()
         val sexoMasculino = bindingVistas.radioButonHombre.isChecked
         val sexoFemenino = bindingVistas.radioButonMujer.isChecked
