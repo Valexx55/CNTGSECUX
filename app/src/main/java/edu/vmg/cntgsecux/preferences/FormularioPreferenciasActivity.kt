@@ -12,6 +12,21 @@ import edu.vmg.cntgsecux.databinding.ActivityFormularioPreferenciasBinding
 
 class FormularioPreferenciasActivity : AppCompatActivity() {
 
+    /**
+     * 1
+     * TODO completar la clase de Preferencias para guardar
+     * todos los datos del formulario
+     *
+     * y que se carguen en la actividad si están guardados
+     *
+     * ---
+     *
+     * 2 tener los datos del usuario en una clase data
+     * y guardarlos en una sola clave como JSON
+     *
+     *
+     */
+
     lateinit var bindingVistas: ActivityFormularioPreferenciasBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +40,15 @@ class FormularioPreferenciasActivity : AppCompatActivity() {
             insets
         }
 
+        //bindingVistas.tilnombre.
+
 
     }
 
     fun botonGuardarFormulario(view: View) {
         Log.d("MIAPP", "Boton guardar formulario tocado")
-        val nombre = bindingVistas.tilnombre.editText?.text.toString()
-        val edad = bindingVistas.tiledad.editText?.text.toString()
+        val nombre = bindingVistas.textnombre.text.toString()
+        val edad = bindingVistas.textedad.text.toString()
         val sexoMasculino = bindingVistas.radioButonHombre.isChecked
         val sexoFemenino = bindingVistas.radioButonMujer.isChecked
         val mayorEdad = bindingVistas.checkBox.isChecked

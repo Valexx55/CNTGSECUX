@@ -31,6 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textnombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Intro nombre" />
@@ -50,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tilnombre">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textedad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
