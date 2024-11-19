@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CNTGSECUX</string>
+
+    <!-- inlcuimos un array de strings, usado a modo de persistencia -->
+    <string-array name="array_opciones_visibilidad">
+        <item>VISIBLE</item>
+        <item>INVISIBLE</item>
+        <item>GONE</item>
+    </string-array>
 </resources>

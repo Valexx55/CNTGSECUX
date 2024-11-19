@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!--
     declaro los permisos que uso, aparecen en la ficha de la tienda
     y al usuario en el momento de la instalación
     -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- declaramos un permiso personalizado con protección normal -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- necesario para comprobar si hay conexión, y qué tipo -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- necesario para comprobar si hay conexión, y qué tipo -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- para permitir escuchar el inicio del teléfono -->
-
-
     <permission
         android:name="edu.vmg.cntgsecux.PERMISO_APP"
         android:label="permiso_personalizado"
@@ -31,17 +28,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CNTGSECUX"
         tools:targetApi="31">
+        <activity
+            android:name=".persistenciavector.SpinnerVisibilityActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".alarmadespertador.FinServicioReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <service
             android:name=".alarmadespertador.ServicioNumeroAleatorio"
             android:enabled="true"
             android:exported="true"
-            android:foregroundServiceType="dataSync"
-            />
+            android:foregroundServiceType="dataSync" />
 
         <receiver
             android:name=".alarmadespertador.AlarmaReceiver"
