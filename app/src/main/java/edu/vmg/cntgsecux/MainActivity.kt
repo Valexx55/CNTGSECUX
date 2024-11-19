@@ -1,7 +1,10 @@
 package edu.vmg.cntgsecux
 
+import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -29,6 +32,28 @@ class MainActivity : AppCompatActivity() {
         //startActivity(Intent(this, SeleccionContacto::class.java))
         //startActivity(Intent(this, SeleccionContactoPermisos::class.java))
         //startActivity(Intent(this, DescargaCancionesActivity::class.java))
-        startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
+        //startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
+        solicitarInicioAutomatico()
+    }
+
+    fun solicitarInicioAutomatico ()
+    {
+        val manufacutrer = Build.MANUFACTURER
+        try {
+            Log.d("MIAPP", "Fabricante $manufacutrer")
+            if("xiaomi".equals (manufacutrer, ignoreCase = true))
+            {
+                val intent = Intent ()
+                intent.setComponent(ComponentName(
+                    "com.miui.securitycenter",
+                    "com.miui.permcenter.autostart.AutoStartManagementActivity"
+                ))
+                startActivityForResult(intent, 303) //para que me lleve a la actividad de ajuests y permita el inicio automático de esta app
+            }
+
+        }catch (e: Exception)
+        {
+            Log.e("MIAPP", e.message, e)
+        }
     }
 }
