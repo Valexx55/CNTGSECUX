@@ -14,12 +14,16 @@ object PreferenciasUsuario {
         editor.commit()
     }
 
+    /**
+     * Recuepero el nombre del fichero de propiedades
+     * @return un string con el valor o null si no existe
+     */
    fun leerNombre(context: Context) :String?
    {
-       var nombre:String? = ""
+       var nombre:String? = null
 
         val fichero = context.getSharedPreferences(NOMBRE_ARCHIVO_PREFERENCIAS, Context.MODE_PRIVATE)
-        nombre = fichero.getString("nombre_usuario", "")
+        nombre = fichero.getString("nombre_usuario", null)
 
        return nombre;
 

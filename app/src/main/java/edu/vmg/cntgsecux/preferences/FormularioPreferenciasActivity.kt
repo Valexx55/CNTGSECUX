@@ -1,5 +1,6 @@
 package edu.vmg.cntgsecux.preferences
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,18 +32,31 @@ class FormularioPreferenciasActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingVistas = ActivityFormularioPreferenciasBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
-        val view = bindingVistas.root
-        setContentView(view)
-        //setContentView(R.layout.activity_formulario_preferencias)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val nombreGuaradado =  PreferenciasUsuario.leerNombre(this)
+        if (nombreGuaradado != null)
+        {
+            Log.d("MIAPP", "El usuario ya rellenó el formulario, existe el nombre")
+            val intent = Intent(this , BienvenidaActivity::class.java)
+            intent.putExtra("nombre", nombreGuaradado)
+            startActivity(intent)
+        } else {
+            Log.d("MIAPP", "El usuario NO rellenó el formulario, primera vez - sin nombre -")
+            bindingVistas = ActivityFormularioPreferenciasBinding.inflate(layoutInflater)
+            enableEdgeToEdge()
+            val view = bindingVistas.root
+            setContentView(view)
+            //setContentView(R.layout.activity_formulario_preferencias)
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
 
-        //bindingVistas.tilnombre.
+
+
+
 
 
     }

@@ -25,6 +25,9 @@
         android:theme="@style/Theme.CNTGSECUX"
         tools:targetApi="31">
         <activity
+            android:name=".preferences.BienvenidaActivity"
+            android:exported="false" />
+        <activity
             android:name=".preferences.FormularioPreferenciasActivity"
             android:exported="false" />
 
