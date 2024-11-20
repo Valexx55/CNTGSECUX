@@ -116,7 +116,10 @@
             android:exported="false"
             android:grantUriPermissions="true">
 
-            <!--TODO termimanos de confifg el fileprovider para guardar nuestra fotos-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/ruta_provider"
+                />
         </provider>
 
     </application>

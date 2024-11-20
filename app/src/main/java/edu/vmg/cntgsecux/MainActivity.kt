@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import edu.vmg.cntgsecux.contacto.SeleccionContacto
 import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
 import edu.vmg.cntgsecux.descargacanciones.DescargaCancionesActivity
+import edu.vmg.cntgsecux.foto.FotoActivity
 import edu.vmg.cntgsecux.permisosbasicos.ActividadUno
 import edu.vmg.cntgsecux.persistenciavector.SpinnerVisibilityActivity
 import edu.vmg.cntgsecux.preferences.FormularioPreferenciasActivity
@@ -35,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         //startActivity(Intent(this, DescargaCancionesActivity::class.java))
         //startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
         //solicitarInicioAutomatico()
-        startActivity(Intent(this, SpinnerVisibilityActivity::class.java))
+        //startActivity(Intent(this, SpinnerVisibilityActivity::class.java))
+        startActivity(Intent(this, FotoActivity::class.java))
     }
 
     fun solicitarInicioAutomatico ()
