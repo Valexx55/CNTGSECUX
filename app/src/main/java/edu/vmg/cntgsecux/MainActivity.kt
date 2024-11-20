@@ -13,6 +13,7 @@ import edu.vmg.cntgsecux.contacto.SeleccionContacto
 import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
 import edu.vmg.cntgsecux.descargacanciones.DescargaCancionesActivity
 import edu.vmg.cntgsecux.permisosbasicos.ActividadUno
+import edu.vmg.cntgsecux.persistenciavector.SpinnerVisibilityActivity
 import edu.vmg.cntgsecux.preferences.FormularioPreferenciasActivity
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         //startActivity(Intent(this, SeleccionContactoPermisos::class.java))
         //startActivity(Intent(this, DescargaCancionesActivity::class.java))
         //startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
-        solicitarInicioAutomatico()
+        //solicitarInicioAutomatico()
+        startActivity(Intent(this, SpinnerVisibilityActivity::class.java))
     }
 
     fun solicitarInicioAutomatico ()
