@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import edu.vmg.cntgsecux.basedatos.BaseDatosActivity
 import edu.vmg.cntgsecux.contacto.SeleccionContacto
 import edu.vmg.cntgsecux.contacto.SeleccionContactoPermisos
 import edu.vmg.cntgsecux.descargacanciones.DescargaCancionesActivity
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         //startActivity(Intent(this, FormularioPreferenciasActivity::class.java))
         //solicitarInicioAutomatico()
         //startActivity(Intent(this, SpinnerVisibilityActivity::class.java))
-        startActivity(Intent(this, FotoActivity::class.java))
+        //startActivity(Intent(this, FotoActivity::class.java))
+        startActivity(Intent(this, BaseDatosActivity::class.java))
     }
 
     fun solicitarInicioAutomatico ()
