@@ -1,9 +1,11 @@
 package edu.vmg.cntgsecux.foto
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -56,8 +58,13 @@ class FotoActivity : AppCompatActivity() {
         val momento_actual = SimpleDateFormat("yyyyMMdd_HHmmss").format(fecha_actual)
         val nombre_fichero = "FOTO_CNT_$momento_actual"
 
+
+
         Log.d("MIAPP", "NOMBRE FICHERO GENERADO = $nombre_fichero")
-        var ruta_foto = getExternalFilesDir(null)?.path + "/" + nombre_fichero
+        //var ruta_foto = getExternalFilesDir(null)?.path + "/" + nombre_fichero /// ruta externa de la app storage/emulated/0/Android/data/edu.vmg.cntgsecux/files/FOTO_CNT_20241121_175448
+        //var ruta_foto = Environment.getExternalStorageDirectory()?.path + "/" + nombre_fichero // ruta exter publica /storage/emulated/0/FOTO_CNT_20241121_175923 da fallo, no puedo guardar las fotos en la zona pública de la memoria externa
+        //var ruta_foto = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path + "/" + nombre_fichero // ruta externa publica de directoria de descargas /storage/emulated/0/Download/FOTO_CNT_20241121_180540
+        var ruta_foto = filesDir.path + "/" + nombre_fichero //ruta privada memoria interna  /data/user/0/edu.vmg.cntgsecux/files/FOTO_CNT_20241121_181307
         Log.d("MIAPP", "RUTA COMPLETA FICHERO GENERADA = $ruta_foto")
 
         //tengo que declarar un Content Provider para almacenar mis fotos

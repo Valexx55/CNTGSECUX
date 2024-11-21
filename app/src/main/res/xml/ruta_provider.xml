@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-files-path name="misfotos" path="/" />
+    <external-files-path name="misfotos" path="/" /> <!--ruta externa publico - privada -->
     <external-path name="fotosdcim" path="/"/>
+    <files-path name="fotoprivada" path="/" /> <!-- ruta interna privada -->
 </paths>

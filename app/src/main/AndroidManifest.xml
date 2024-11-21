@@ -12,16 +12,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- necesario para comprobar si hay conexión, y qué tipo -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- necesario para comprobar si hay conexión, y qué tipo -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- para permitir escuchar el inicio del teléfono -->
-    <uses-permission android:name="android.permission.CAMERA"/> <!-- para poder usar la cámara fotos o videos -->
-    <uses-feature android:name="android.hardware.camera" android:required="true" /> <!-- con el valor a true exijo que los dispositivos tengan cámara para poder instalar esta app-->
-
-
-
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- para poder usar la cámara fotos o videos -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" /> <!-- con el valor a true exijo que los dispositivos tengan cámara para poder instalar esta app -->
     <permission
         android:name="edu.vmg.cntgsecux.PERMISO_APP"
         android:label="permiso_personalizado"
         android:protectionLevel="normal" />
-
 
     <application
         android:allowBackup="true"
@@ -34,6 +32,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CNTGSECUX"
         tools:targetApi="31">
+        <activity
+            android:name=".basedatos.BaseDatosActivity"
+            android:exported="false" />
         <activity
             android:name=".foto.FotoActivity"
             android:exported="false" />
@@ -111,17 +112,14 @@
         </activity>
 
         <provider
-            android:authorities="edu.vmg.cntgsecux"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="edu.vmg.cntgsecux"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/ruta_provider"
-                />
+                android:resource="@xml/ruta_provider" />
         </provider>
-
     </application>
 
 </manifest>
